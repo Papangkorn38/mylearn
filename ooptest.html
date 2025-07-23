@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>เรียนรู้การเขียนโปรแกรมเชิงวัตถุ (OOP) - เนื้อหาสมบูรณ์</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Sarabun', sans-serif;
+            background-color: #f0f4f8;
+        }
+        .prose {
+            max-width: none;
+        }
+        .prose h1 {
+            color: #1e293b;
+            font-size: 2.25rem; /* 36px */
+        }
+        .prose h2 {
+            font-size: 1.75rem; /* 28px */
+            font-weight: 700;
+            margin-top: 2.5rem;
+            margin-bottom: 1.5rem;
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 0.75rem;
+            color: #1e293b;
+        }
+        .prose h3 {
+            font-size: 1.5rem; /* 24px */
+            font-weight: 600;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            color: #334155;
+        }
+        .prose p, .prose li {
+            font-size: 1.125rem; /* 18px */
+            line-height: 1.8;
+            color: #475569;
+        }
+        .prose pre {
+            background-color: #1e293b;
+            color: #e2e8f0;
+            padding: 1.5rem;
+            border-radius: 0.75rem;
+            position: relative;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+        }
+        .copy-btn {
+            position: absolute;
+            top: 0.75rem;
+            right: 0.75rem;
+            background-color: #475569;
+            color: white;
+            border: none;
+            padding: 0.375rem 0.75rem;
+            border-radius: 0.375rem;
+            cursor: pointer;
+            font-size: 0.875rem;
+            transition: background-color 0.2s;
+        }
+        .copy-btn:hover {
+            background-color: #64748b;
+        }
+        .quiz-option {
+            border: 2px solid #e2e8f0;
+            transition: all 0.2s ease-in-out;
+        }
+        .quiz-option:hover {
+            background-color: #f8fafc;
+            border-color: #3b82f6;
+            transform: translateY(-2px);
+        }
+        .quiz-option.correct {
+            background-color: #ecfdf5;
+            border-color: #22c55e;
+            color: #15803d;
+            font-weight: 600;
+        }
+        .quiz-option.incorrect {
+            background-color: #fef2f2;
+            border-color: #ef4444;
+            color: #b91c1c;
+        }
+        .solution-box {
+            background-color: #f8fafc;
+            border-left: 4px solid #64748b;
+            padding: 1.25rem;
+            margin-top: 1.25rem;
+            border-radius: 0.5rem;
+        }
+        .nav-link {
+            transition: all 0.3s ease;
+            border-bottom: 2px solid transparent;
+        }
+        .nav-link.active {
+            color: #2563eb;
+            font-weight: 600;
+            border-bottom-color: #2563eb;
+        }
+        .nav-link:hover {
+            color: #2563eb;
+        }
+    </style>
+</head>
+<body class="text-slate-800">
+
+    <div class="container mx-auto p-4 md:p-8">
+        <!-- Header -->
+        <header class="text-center mb-8">
+            <h1 class="text-4xl md:text-5xl font-bold text-slate-900">เรียนรู้การเขียนโปรแกรมเชิงวัตถุ</h1>
+            <p class="text-lg text-slate-600 mt-2">เริ่มต้นทีละขั้นตอน พร้อมแบบทดสอบเพื่อความเข้าใจ</p>
+        </header>
+
+        <!-- Navigation -->
+        <nav class="bg-white rounded-lg shadow-sm p-2 mb-8 sticky top-4 z-10">
+            <ul id="navbar" class="flex flex-wrap justify-center items-center gap-x-4 gap-y-2">
+                <!-- Nav links will be injected here -->
+            </ul>
+        </nav>
+
+        <!-- Main Content -->
+        <main id="content-container" class="bg-white p-6 md:p-10 rounded-xl shadow-lg prose min-h-[50vh]">
+            <!-- Content will be injected here -->
+        </main>
+
+        <footer class="text-center mt-12 text-slate-500">
+            <p>สร้างสรรค์เพื่อการเรียนรู้ OOP</p>
+        </footer>
+    </div>
+
+    <script>
+        const contentData = {
+            "chapter-0": {
+                title: "บทนำ",
+                icon: "fa-rocket",
+                content: `
+                    <div class="text-center">
+                        <i class="fas fa-laptop-code text-6xl text-blue-500 mb-4"></i>
+                        <h2 class="!border-none">ยินดีต้อนรับสู่คอร์สเรียน OOP!</h2>
+                        <p class="text-xl">คอร์สนี้จะพาคุณไปทำความรู้จักกับหลักการเขียนโปรแกรมเชิงวัตถุ (Object-Oriented Programming) ตั้งแต่พื้นฐานไปจนถึงแนวคิดหลักที่สำคัญ 4 ประการ</p>
+                        <p>เราได้ออกแบบเนื้อหาให้เข้าใจง่าย เหมือนกับการสร้างบ้านจากบล็อกเลโก้ พร้อมแบบทดสอบในทุกบทเรียนเพื่อให้คุณมั่นใจว่าเข้าใจเนื้อหาอย่างถ่องแท้</p>
+                        <p class="mt-6"><strong>เลือกบทเรียนจากเมนูด้านบนเพื่อเริ่มต้นได้เลย!</strong></p>
+                    </div>
+                `,
+                quiz: []
+            },
+            "chapter-1": {
+                title: "ภาพรวม OOP",
+                icon: "fa-binoculars",
+                content: `
+                    <p>ก่อนที่เราจะไปลงรายละเอียดของการเขียนโค้ด มาทำความเข้าใจแนวคิดพื้นฐานของ OOP กันก่อนครับ</p>
+                    <h3>OOP คืออะไร? (เหมือนสร้างบ้านจากบล็อก)</h3>
+                    <p>ลองจินตนาการว่าคุณกำลังจะ <strong>สร้างบ้าน</strong> ขึ้นมาหนึ่งหลังครับ</p>
+                    <p><strong>วิธีคิดแบบเก่า (Non-OOP):</strong><br>
+                    เหมือนกับการที่คุณต้องไปเตรียมดิน ผสมปูน ก่ออิฐทีละก้อน วางไม้ทีละท่อน ไปเรื่อยๆ จนกว่าจะได้บ้าน ซึ่งถ้าคุณอยากสร้างบ้านอีกหลังที่คล้ายๆ กัน คุณก็ต้องทำขั้นตอนเหล่านี้ซ้ำใหม่ทั้งหมด หรือถ้าอยากจะปรับเปลี่ยนอะไรเล็กน้อย คุณอาจจะต้องรื้อโครงสร้างบางส่วนแล้วสร้างใหม่</p>
+                    <p><strong>วิธีคิดแบบ OOP:</strong><br>
+                    เราจะเปลี่ยนวิธีคิดใหม่ครับ แทนที่จะก่ออิฐทีละก้อน เราจะเริ่มจากการ <strong>ออกแบบ "พิมพ์เขียว"</strong> หรือ "แม่พิมพ์" ของส่วนประกอบต่างๆ ของบ้านก่อน เช่น:</p>
+                    <ul>
+                        <li>พิมพ์เขียวสำหรับ "ผนัง" (ระบุว่าต้องมีอิฐกี่ก้อน ปูนเท่าไหร่)</li>
+                        <li>พิมพ์เขียวสำหรับ "ประตู" (ระบุว่าต้องมีขนาดเท่าไหร่ ทำจากไม้ชนิดไหน)</li>
+                        <li>พิมพ์เขียวสำหรับ "หน้าต่าง" (ระบุว่ามีกระจกเท่าไหร่ กรอบแบบไหน)</li>
+                    </ul>
+                    <p>เมื่อเรามีพิมพ์เขียวเหล่านี้แล้ว เราสามารถ:</p>
+                    <ul>
+                        <li>สร้างผนัง ประตู หน้าต่าง ได้กี่อันก็ได้ ตามพิมพ์เขียวที่เรามี</li>
+                        <li>นำส่วนประกอบเหล่านี้มาประกอบกัน เป็นบ้านที่สมบูรณ์</li>
+                        <li>ถ้าอยากสร้างบ้านอีกหลังที่เหมือนกัน ก็แค่ใช้พิมพ์เขียวเดิม สร้างส่วนประกอบเดิม แล้วประกอบใหม่</li>
+                    </ul>
+                    <p>ในโลกของคอมพิวเตอร์:</p>
+                    <ul>
+                        <li><i class="fas fa-home text-blue-500 mr-2"></i><strong>บ้าน</strong> คือ <strong>โปรแกรม</strong> หรือ <strong>ซอฟต์แวร์</strong> ของเรา</li>
+                        <li><i class="fas fa-ruler-combined text-blue-500 mr-2"></i><strong>พิมพ์เขียว</strong> คือ <strong>คลาส (Class)</strong></li>
+                        <li><i class="fas fa-cube text-blue-500 mr-2"></i><strong>ผนัง, ประตู, หน้าต่าง</strong> ที่สร้างขึ้นมาจริง ๆ คือ <strong>วัตถุ (Object)</strong></li>
+                    </ul>
+                    <h3>ทำไมถึงต้องใช้ OOP?</h3>
+                    <ul>
+                        <li><strong>จัดระเบียบโค้ด:</strong> ทำให้โค้ดของเรามีโครงสร้างที่เป็นระเบียบ คล้ายๆ กับการจัดบ้านให้เป็นสัดส่วน ทำให้หาของง่าย ทำความสะอาดง่าย</li>
+                        <li><strong>นำกลับมาใช้ซ้ำได้ (Reusability):</strong> เราสามารถใช้ "พิมพ์เขียว" เดิมสร้าง "วัตถุ" ใหม่ได้หลายๆ ครั้ง หรือแม้แต่เอา "พิมพ์เขียว" เดิมไปต่อยอดเป็นพิมพ์เขียวใหม่ได้</li>
+                        <li><strong>ง่ายต่อการบำรุงรักษาและแก้ไข:</strong> ถ้ามีอะไรพังในส่วนใดส่วนหนึ่งของโปรแกรม เราสามารถแก้ไขส่วนนั้นได้โดยไม่กระทบส่วนอื่นมากนัก</li>
+                        <li><strong>ลดความซับซ้อน:</strong> ทำให้การมองภาพรวมของโปรแกรมง่ายขึ้น เพราะเราแบ่งมันออกเป็นส่วนย่อยๆ ที่จัดการได้</li>
+                    </ul>
+                `,
+                quiz: [
+                    {
+                        question: '1. ในแนวคิด OOP "พิมพ์เขียว" หรือ "แบบแผน" ของสิ่งของต่าง ๆ เราเรียกว่าอะไร?',
+                        options: ["วัตถุ (Object)", "คลาส (Class)", "ฟังก์ชัน (Function)", "ตัวแปร (Variable)"],
+                        answer: "คลาส (Class)"
+                    },
+                    {
+                        question: '2. "สิ่งของที่ถูกสร้างขึ้นมาจริง ๆ" จากพิมพ์เขียวในแนวคิด OOP เราเรียกว่าอะไร?',
+                        options: ["พิมพ์เขียว", "คลาส", "วัตถุ (Object)", "รูปแบบ (Pattern)"],
+                        answer: "วัตถุ (Object)"
+                    },
+                    {
+                        question: '3. ข้อใดคือประโยชน์หลักของการใช้ OOP ในการเขียนโปรแกรม? (เลือกได้หลายข้อ)',
+                        options: ["ทำให้โปรแกรมมีขนาดเล็กลงเสมอ", "ทำให้โค้ดเป็นระเบียบและเข้าใจง่ายขึ้น", "สามารถนำโค้ดที่เขียนไว้แล้วกลับมาใช้ซ้ำได้", "ทำให้โปรแกรมทำงานได้เร็วขึ้นเป็นสองเท่า"],
+                        answer: ["ทำให้โค้ดเป็นระเบียบและเข้าใจง่ายขึ้น", "สามารถนำโค้ดที่เขียนไว้แล้วกลับมาใช้ซ้ำได้"],
+                        multi: true
+                    }
+                ]
+            },
+            "chapter-2": {
+                title: "Class & Object",
+                icon: "fa-cubes",
+                content: `
+                    <p>เมื่อเราเข้าใจภาพรวมแล้ว เรามาลงรายละเอียดกับสองแนวคิดพื้นฐานที่สุดของ OOP คือ คลาส และ วัตถุ ครับ</p>
+                    <h3>2.1 คลาส (Class) คืออะไร?</h3>
+                    <p>คลาส (Class) ก็คือ <strong>พิมพ์เขียว</strong> หรือ <strong>แบบแผน</strong> ที่เราใช้ในการสร้างวัตถุ มันไม่ใช่ "ของจริง" ที่ใช้งานได้ทันที แต่เป็นแค่ "โครงสร้าง" ที่บอกว่าสิ่งที่เราจะสร้างขึ้นมานั้น จะมีอะไรบ้าง และทำอะไรได้บ้าง</p>
+                    <p><strong>ตัวอย่างในชีวิตจริง:</strong></p>
+                    <ul>
+                        <li><strong>คลาส โทรศัพท์มือถือ:</strong>
+                            <ul>
+                                <li>คุณสมบัติ (Attributes): ยี่ห้อ, รุ่น, สี, ขนาดหน้าจอ, ความจุแบตเตอรี่</li>
+                                <li>พฤติกรรม/การกระทำ (Methods): โทรออก, รับสาย, ส่งข้อความ, ถ่ายรูป</li>
+                            </ul>
+                        </li>
+                        <li><strong>คลาส นักเรียน:</strong>
+                            <ul>
+                                <li>คุณสมบัติ (Attributes): ชื่อ, นามสกุล, อายุ, เลขประจำตัว, ชั้นเรียน</li>
+                                <li>พฤติกรรม/การกระทำ (Methods): เรียน, ทำการบ้าน, สอบ</li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <h3>2.2 วัตถุ (Object) คืออะไร?</h3>
+                    <p>วัตถุ (Object) คือ <strong>"สิ่งของจริง"</strong> ที่ถูกสร้างขึ้นมาจากคลาส เป็น "Instance" (อินสแตนซ์) ของคลาสนั้น ๆ วัตถุแต่ละชิ้นจะมีค่าของคุณสมบัติที่แตกต่างกันได้ แต่จะมีพฤติกรรมตามที่คลาสกำหนดไว้</p>
+                    <p><strong>ตัวอย่างจากคลาส โทรศัพท์มือถือ:</strong></p>
+                    <ul>
+                        <li><strong>วัตถุ my_phone:</strong> ยี่ห้อ: Apple, รุ่น: iPhone 15 Pro, สี: Titanium Blue</li>
+                        <li><strong>วัตถุ your_phone:</strong> ยี่ห้อ: Samsung, รุ่น: Galaxy S24, สี: Phantom Black</li>
+                    </ul>
+                    <p>จะเห็นว่า my_phone กับ your_phone เป็น "โทรศัพท์มือถือ" เหมือนกัน แต่มีรายละเอียด (คุณสมบัติ) ที่แตกต่างกัน</p>
+                    <h3>2.3 โครงสร้างของคลาสใน Python</h3>
+                    <pre><code>class ชื่อคลาส:
+    # Constructor: จะถูกเรียกอัตโนมัติเมื่อสร้างวัตถุใหม่
+    # ทำหน้าที่กำหนดค่าเริ่มต้นให้กับคุณสมบัติ (Attributes)
+    def __init__(self, พารามิเตอร์1, พารามิเตอร์2, ...):
+        # self คือตัววัตถุเอง
+        self.คุณสมบัติ_1 = พารามิเตอร์1
+        self.คุณสมบัติ_2 = พารามิเตอร์2
+
+    # Method: พฤติกรรมของวัตถุ
+    def ชื่อเมธอด(self, ...):
+        # โค้ดที่อธิบายว่าเมธอดนี้ทำอะไร
+        pass
+</code></pre>
+                    <ul>
+                        <li><code>class ชื่อคลาส:</code>: คือการประกาศว่าเรากำลังจะสร้างคลาส</li>
+                        <li><code>def __init__(self, ...):</code>: คือเมธอดพิเศษที่เรียกว่า <strong>Constructor</strong> หรือ Initializer</li>
+                        <li><code>self</code>: เป็นพารามิเตอร์แรกที่ต้องมีในทุกเมธอดของคลาส มันหมายถึง "ตัววัตถุเอง"</li>
+                        <li><code>def ชื่อเมธอด(self, ...):</code>: คือการประกาศ <strong>Method</strong> ซึ่งก็คือฟังก์ชันที่อยู่ภายในคลาส</li>
+                    </ul>
+                    <h3>ตัวอย่างโค้ด: คลาส Person และวัตถุ</h3>
+                    <pre><code>class Person:
+    def __init__(self, name, age):
+        self.name = name  # คุณสมบัติ: ชื่อ
+        self.age = age    # คุณสมบัติ: อายุ
+
+    def greet(self): # เมธอด: ทักทาย
+        print(f"Hello, my name is {self.name} and I am {self.age} years old.")
+
+    def have_birthday(self): # เมธอด: ฉลองวันเกิด
+        self.age += 1 # เพิ่มอายุ 1 ปี
+        print(f"Happy Birthday, {self.name}! You are now {self.age} years old.")
+
+# 1. สร้างวัตถุ (Object) ชื่อ 'person1' จากคลาส 'Person'
+person1 = Person("Alice", 30)
+
+# 2. สร้างวัตถุ 'person2' อีกอัน
+person2 = Person("Bob", 25)
+
+# 3. เข้าถึงคุณสมบัติของวัตถุ
+print(f"Person 1's name: {person1.name}") # ผลลัพธ์: Person 1's name: Alice
+
+# 4. เรียกใช้เมธอดของวัตถุ
+person1.greet()         # ผลลัพธ์: Hello, my name is Alice and I am 30 years old.
+person2.have_birthday() # ผลลัพธ์: Happy Birthday, Bob! You are now 26 years old.
+person2.greet()         # ผลลัพธ์: Hello, my name is Bob and I am 26 years old.
+</code></pre>
+                `,
+                quiz: [
+                    {
+                        question: "1. เมธอดพิเศษที่ถูกเรียกโดยอัตโนมัติเมื่อสร้างวัตถุใหม่ใน Python คือเมธอดชื่ออะไร?",
+                        options: ["__start__", "__init__", "create_object", "main"],
+                        answer: "__init__"
+                    },
+                    {
+                        question: "2. พารามิเตอร์ self ในเมธอดของคลาสใน Python ทำหน้าที่อะไร?",
+                        options: ["เป็นตัวแปรที่เก็บชื่อคลาส", "เป็นตัวแปรที่เก็บชื่อเมธอด", "เป็นการอ้างอิงถึงวัตถุที่กำลังถูกเรียกใช้เมธอดนั้น ๆ", "เป็นคำสั่งที่ใช้ในการจบการทำงานของโปรแกรม"],
+                        answer: "เป็นการอ้างอิงถึงวัตถุที่กำลังถูกเรียกใช้เมธอดนั้น ๆ"
+                    },
+                    {
+                        question: "3. จงสร้างคลาสชื่อ Book ที่มีคุณสมบัติ title และ author และมีเมธอด get_info() ที่จะพิมพ์ข้อมูลหนังสือออกมา",
+                        isCoding: true,
+                        solution: `class Book:
+    def __init__(self, title, author):
+        self.title = title
+        self.author = author
+
+    def get_info(self):
+        print(f"Title: {self.title}, Author: {self.author}")
+
+# สร้างวัตถุ
+my_book = Book("The Hitchhiker's Guide to the Galaxy", "Douglas Adams")
+my_book.get_info()`
+                    }
+                ]
+            },
+            "chapter-3": {
+                title: "Encapsulation",
+                icon: "fa-shield-halved",
+                content: `
+                    <h3>3.1 Encapsulation คืออะไร? (เหมือนกล่องดำ)</h3>
+                    <p>ลองนึกภาพเครื่องเล่น DVD ของคุณ คุณรู้ว่ามีปุ่ม Play, Stop แต่คุณไม่จำเป็นต้องรู้ว่าข้างในมีวงจรไฟฟ้าหรือกลไกอะไรทำงานอยู่บ้าง</p>
+                    <p>Encapsulation คือแนวคิด "การรวมข้อมูล (คุณสมบัติ) และการกระทำ (เมธอด) ที่เกี่ยวข้องไว้ด้วยกัน" พร้อมทั้ง "ปกปิดรายละเอียดการทำงานภายใน" จากโลกภายนอก</p>
+                    <p><strong>หลักการสำคัญ:</strong></p>
+                    <ul>
+                        <li><strong>Data Hiding (การปกปิดข้อมูล):</strong> ซ่อนคุณสมบัติภายในของวัตถุไว้ ทำให้โค้ดภายนอกไม่สามารถเข้าถึงหรือเปลี่ยนแปลงข้อมูลเหล่านั้นได้โดยตรง</li>
+                        <li><strong>Interface (ส่วนต่อประสาน):</strong> มีเพียงเมธอดบางอย่างเท่านั้นที่ถูกเปิดเผยออกมาให้โค้ดภายนอกเรียกใช้งานได้</li>
+                    </ul>
+                    <h3>3.3 Encapsulation ใน Python</h3>
+                    <p>Python ใช้ข้อตกลงในการตั้งชื่อ (Naming Conventions) เพื่อบ่งบอกเจตนาในการเข้าถึง:</p>
+                    <ul>
+                        <li><strong>Public:</strong> <code>name</code> (เข้าถึงได้จากทุกที่)</li>
+                        <li><strong>Protected:</strong> <code>_name</code> (ใช้ _ หนึ่งตัวนำหน้า ควรเข้าถึงจากในคลาสหรือคลาสลูกเท่านั้น)</li>
+                        <li><strong>Private:</strong> <code>__name</code> (ใช้ __ สองตัวนำหน้า ทำให้การเข้าถึงจากภายนอกโดยตรงทำได้ยาก)</li>
+                    </ul>
+                    <h3>ตัวอย่างโค้ด: BankAccount</h3>
+                    <pre><code>class BankAccount:
+    def __init__(self, account_holder, initial_balance=0):
+        self.account_holder = account_holder # Public attribute
+        self.__balance = initial_balance     # Private attribute
+
+    def deposit(self, amount): # Public method
+        if amount > 0:
+            self.__balance += amount
+            print(f"Deposited {amount}. New balance: {self.__balance}")
+
+    def withdraw(self, amount): # Public method
+        if 0 < amount <= self.__balance:
+            self.__balance -= amount
+            print(f"Withdrew {amount}. New balance: {self.__balance}")
+        else:
+            print("Invalid withdrawal amount or insufficient balance.")
+
+    def get_balance(self): # Public method สำหรับอ่านค่า Private
+        return self.__balance
+
+# สร้างวัตถุ
+my_account = BankAccount("Chaiyo", 5000)
+
+# print(my_account.__balance) # จะเกิด AttributeError!
+# ต้องเข้าถึงผ่าน Public method ที่ถูกออกแบบมา
+print(f"Current balance: {my_account.get_balance()} baht.")
+
+my_account.deposit(1000)
+my_account.withdraw(200)
+</code></pre>
+                `,
+                quiz: [
+                    {
+                        question: "1. ข้อใดคือแนวคิดหลักของการห่อหุ้ม (Encapsulation)?",
+                        options: ["การสืบทอดคุณสมบัติจากคลาสแม่ไปยังคลาสลูก", "การรวมข้อมูลและการกระทำที่เกี่ยวข้องไว้ด้วยกัน และซ่อนรายละเอียดภายใน", "การที่วัตถุต่างชนิดกันสามารถตอบสนองต่อคำสั่งเดียวกันได้", "การสร้างพิมพ์เขียวสำหรับวัตถุ"],
+                        answer: "การรวมข้อมูลและการกระทำที่เกี่ยวข้องไว้ด้วยกัน และซ่อนรายละเอียดภายใน"
+                    },
+                    {
+                        question: '2. คุณสมบัติหรือเมธอดใดใน Python ที่ถือว่าเป็น "Private" ตามข้อตกลง?',
+                        options: ["name", "_name", "__name", "public_name"],
+                        answer: "__name"
+                    },
+                    {
+                        question: "3. จงแก้ไขคลาส Person ให้คุณสมบัติ name และ age เป็นแบบ Private และเพิ่มเมธอดสำหรับอ่านค่า",
+                        isCoding: true,
+                        solution: `class Person:
+    def __init__(self, name, age):
+        self.__name = name
+        self.__age = age
+
+    def get_name(self):
+        return self.__name
+
+    def get_age(self):
+        return self.__age
+
+p1 = Person("Alice", 30)
+print(p1.get_name())`
+                    }
+                ]
+            },
+            "chapter-4": {
+                title: "Inheritance",
+                icon: "fa-sitemap",
+                content: `
+                    <h3>4.1 Inheritance คืออะไร? (เหมือนสายเลือดในครอบครัว)</h3>
+                    <p>Inheritance คือการที่ <strong>คลาสลูก (Child Class / Subclass)</strong> สามารถ "รับช่วง" หรือ "สืบทอด" คุณสมบัติและเมธอดจาก <strong>คลาสแม่ (Parent Class / Superclass)</strong> ได้</p>
+                    <p>ความสัมพันธ์: มันคือความสัมพันธ์แบบ <strong>"is-a" (เป็น)</strong> เช่น:</p>
+                    <ul>
+                        <li>"รถยนต์ไฟฟ้า" <strong>เป็น</strong> "รถยนต์" (ElectricCar is a Car)</li>
+                        <li>"นักเรียน" <strong>เป็น</strong> "คน" (Student is a Person)</li>
+                    </ul>
+                    <h3>ตัวอย่างโค้ด: Animal, Dog, Cat</h3>
+                    <pre><code>class Animal: # คลาสแม่ (Parent Class)
+    def __init__(self, name):
+        self.name = name
+
+    def eat(self):
+        print(f"{self.name} is eating food.")
+
+class Dog(Animal): # คลาสลูก (Child Class) ของ Animal
+    def __init__(self, name, breed):
+        # เรียก Constructor ของคลาสแม่ (Animal)
+        super().__init__(name)
+        self.breed = breed # คุณสมบัติเฉพาะของ Dog
+
+    # Override (เขียนทับ) เมธอด eat ของคลาสแม่
+    def eat(self):
+        print(f"{self.name} is eating dog food.")
+
+    # เมธอดเฉพาะของ Dog
+    def bark(self):
+        print(f"{self.name} says Woof! Woof!")
+
+my_dog = Dog("Buddy", "Golden Retriever")
+my_dog.eat()   # จะเรียกเมธอด eat() ที่ถูก Override ในคลาส Dog
+my_dog.bark()  # เมธอดเฉพาะของ Dog
+</code></pre>
+                    <ul>
+                        <li><code>class Dog(Animal):</code> หมายความว่าคลาส Dog สืบทอดมาจากคลาส Animal</li>
+                        <li><code>super().__init__(name)</code> ใช้สำหรับเรียก Constructor ของคลาสแม่</li>
+                        <li><strong>Overriding (การเขียนทับ):</strong> คือการที่คลาสลูกสร้างเมธอดที่มีชื่อเดียวกับคลาสแม่เพื่อเปลี่ยนพฤติกรรม</li>
+                    </ul>
+                `,
+                quiz: [
+                    {
+                        question: "1. ข้อใดคือความสัมพันธ์ที่แสดงถึง Inheritance ได้ถูกต้อง?",
+                        options: ["has-a (มี)", "is-a (เป็น)", "does-a (ทำ)", "makes-a (สร้าง)"],
+                        answer: "is-a (เป็น)"
+                    },
+                    {
+                        question: "2. คำสั่งใดที่ใช้ในการเรียก Constructor ของคลาสแม่จากภายในคลาสลูก?",
+                        options: ["self.parent()", "ParentClass.__init__(self)", "super().__init__(...)", "new ParentClass(...)"],
+                        answer: "super().__init__(...)"
+                    },
+                    {
+                        question: "3. จงสร้างคลาส Vehicle และคลาสลูก Bicycle ที่สืบทอดมา พร้อม Override เมธอด move()",
+                        isCoding: true,
+                        solution: `class Vehicle:
+    def __init__(self, speed):
+        self.speed = speed
+    def move(self):
+        print(f"Vehicle is moving at {self.speed} km/h.")
+
+class Bicycle(Vehicle):
+    def __init__(self, speed):
+        super().__init__(speed)
+    def move(self): # Override
+        print(f"Bicycle is pedaling at {self.speed} km/h.")
+
+my_bike = Bicycle(15)
+my_bike.move()`
+                    }
+                ]
+            },
+            "chapter-5": {
+                title: "Polymorphism",
+                icon: "fa-shapes",
+                content: `
+                    <h3>5.1 Polymorphism คืออะไร? (เหมือนปุ่ม "เล่น" ในเครื่องเล่นต่างๆ)</h3>
+                    <p>ลองนึกถึงปุ่ม "Play" ครับ ถ้าคุณกดบนเครื่องเล่น DVD มันจะเล่นหนัง ถ้ากดบนเครื่องเล่น MP3 มันจะเล่นเพลง ปุ่มเดียวกันแต่มีพฤติกรรมที่แตกต่างกัน นี่คือแนวคิดของ Polymorphism</p>
+                    <p>ใน OOP, Polymorphism คือ "การที่วัตถุต่างชนิดกัน (แต่มาจากคลาสที่มีความสัมพันธ์กัน) สามารถตอบสนองต่อคำสั่ง (เมธอด) เดียวกันในรูปแบบที่แตกต่างกันได้"</p>
+                    <p>ใน Python เราใช้หลักการ <strong>"Duck Typing"</strong>: "ถ้ามันเดินเหมือนเป็ด ว่ายน้ำเหมือนเป็ด และร้องเหมือนเป็ด มันก็คือเป็ด" หมายความว่าใน Python เราไม่จำเป็นต้องระบุประเภทของวัตถุอย่างชัดเจน ตราบใดที่วัตถุนั้นมีเมธอดที่เราต้องการเรียกใช้งาน มันก็จะทำงานได้</p>
+                    <h3>ตัวอย่างโค้ด: Polymorphism</h3>
+                    <pre><code>class Dog:
+    def make_sound(self):
+        print("Woof!")
+
+class Cat:
+    def make_sound(self):
+        print("Meow!")
+
+class Duck:
+    def make_sound(self):
+        print("Quack!")
+
+# สร้างลิสต์ของวัตถุหลากหลายประเภท
+animals = [Dog(), Cat(), Duck()]
+
+# เขียนฟังก์ชันที่ไม่สนใจว่า animal เป็น Dog, Cat, หรือ Duck
+# ตราบใดที่มันมีเมธอด make_sound() มันก็จะทำงานได้
+for animal in animals:
+    animal.make_sound() # แต่ละวัตถุจะทำเสียงตามชนิดของตัวเอง
+</code></pre>
+                `,
+                quiz: [
+                    {
+                        question: "1. ข้อใดคือคำจำกัดความที่ถูกต้องของ Polymorphism?",
+                        options: ["การรวมข้อมูลและการกระทำไว้ในหน่วยเดียว", "การที่คลาสลูกสืบทอดคุณสมบัติจากคลาสแม่", "การที่วัตถุต่างชนิดกันสามารถตอบสนองต่อเมธอดเดียวกันในรูปแบบที่แตกต่างกันได้", "การซ่อนรายละเอียดภายในของวัตถุ"],
+                        answer: "การที่วัตถุต่างชนิดกันสามารถตอบสนองต่อเมธอดเดียวกันในรูปแบบที่แตกต่างกันได้"
+                    },
+                    {
+                        question: '2. "Duck Typing" เกี่ยวข้องกับ Polymorphism อย่างไร?',
+                        options: ["บังคับให้ต้องกำหนดชนิดข้อมูล", "เราสามารถเรียกเมธอดของวัตถุได้ ตราบใดที่วัตถุนั้นมีเมธอดนั้นอยู่", "จำกัดให้ใช้ได้เฉพาะกับสัตว์ปีก", "เป็นชื่อเรียกของ __init__"],
+                        answer: "เราสามารถเรียกเมธอดของวัตถุได้ ตราบใดที่วัตถุนั้นมีเมธอดนั้นอยู่"
+                    },
+                    {
+                        question: "3. จงสร้างคลาส Worker และคลาสลูก Builder, Programmer ที่ Override เมธอด work()",
+                        isCoding: true,
+                        solution: `class Worker:
+    def work(self): print("Doing general tasks.")
+class Builder(Worker):
+    def work(self): print("Building a house.")
+class Programmer(Worker):
+    def work(self): print("Writing code.")
+
+def assign_task(worker):
+    worker.work()
+
+assign_task(Builder())
+assign_task(Programmer())`
+                    }
+                ]
+            },
+            "chapter-6": {
+                title: "Abstraction",
+                icon: "fa-lightbulb",
+                content: `
+                    <h3>6.1 Abstraction คืออะไร? (เหมือนปุ่มกดลิฟต์)</h3>
+                    <p>ลองนึกถึงการใช้ลิฟต์ คุณต้องการขึ้นชั้น 5 คุณก็แค่กดปุ่มเลข 5 โดยไม่จำเป็นต้องรู้ว่าข้างในลิฟต์มีกลไกอะไรทำงานอยู่บ้าง</p>
+                    <p>Abstraction คือแนวคิดที่ว่า "การแสดงเฉพาะส่วนที่จำเป็นและเกี่ยวข้องออกไปให้ผู้ใช้งานเห็น" และ "ซ่อนรายละเอียดที่ไม่จำเป็นหรือไม่เกี่ยวข้องเอาไว้"</p>
+                    <h3>6.3 Abstraction ใน Python</h3>
+                    <p>ใน Python เราสามารถทำ Abstraction ได้โดยใช้ <strong>Abstract Base Classes (ABCs)</strong> ซึ่งเป็นคลาสที่คุณไม่สามารถสร้างวัตถุได้โดยตรง และมักจะมีเมธอดที่คุณต้องบังคับให้คลาสลูกเขียนโค้ดตาม (เรียกว่า Abstract Methods)</p>
+                    <p><strong>Abstract Class:</strong> คลาสที่ไม่สามารถสร้างวัตถุได้โดยตรง มีไว้เพื่อเป็น "แม่แบบ" ให้คลาสลูกไปสืบทอดและนำไป Implement</p>
+                    <p><strong>Abstract Method:</strong> เมธอดที่ถูกประกาศไว้ในคลาส Abstract แต่ไม่มีการเขียนโค้ดภายใน เป็นการบังคับให้คลาสลูกที่สืบทอดไป ต้องเขียนโค้ดสำหรับเมธอดนั้น ๆ</p>
+                    <h3>ตัวอย่างโค้ด: Abstraction ด้วย abc โมดูล</h3>
+                    <pre><code>from abc import ABC, abstractmethod
+
+class Vehicle(ABC): # คลาส Vehicle เป็นคลาส Abstract
+    @abstractmethod # เมธอดนี้เป็น Abstract Method
+    def move(self):
+        # ไม่มีโค้ดภายใน เพราะเป็นเมธอดที่คลาสลูกต้องไป Implement เอง
+        pass
+
+class Car(Vehicle): # คลาส Car สืบทอดจาก Vehicle
+    def move(self): # ต้อง Implement เมธอด move()
+        print("The car is driving on the road.")
+
+class Bicycle(Vehicle): # คลาส Bicycle สืบทอดจาก Vehicle
+    def move(self): # ต้อง Implement เมธอด move()
+        print("The bicycle is pedaling.")
+
+# ลองสร้างวัตถุจากคลาส Vehicle โดยตรง (จะ Error!)
+# my_vehicle = Vehicle() # TypeError: Can't instantiate abstract class Vehicle
+
+my_car = Car()
+my_bicycle = Bicycle()
+
+my_car.move()
+my_bicycle.move()
+</code></pre>
+                `,
+                quiz: [
+                    {
+                        question: "1. ข้อใดคือหลักการสำคัญของ Abstraction?",
+                        options: ["การนำโค้ดกลับมาใช้ซ้ำ", "การสืบทอดคุณสมบัติจากคลาสแม่", "การแสดงเฉพาะส่วนที่จำเป็นและซ่อนรายละเอียดที่ไม่เกี่ยวข้อง", "การรวมข้อมูลและการกระทำไว้ในหน่วยเดียว"],
+                        answer: "การแสดงเฉพาะส่วนที่จำเป็นและซ่อนรายละเอียดที่ไม่เกี่ยวข้อง"
+                    },
+                    {
+                        question: "2. ถ้าคลาสหนึ่งเป็น Abstract Class ข้อใดถูกต้อง?",
+                        options: ["สร้างวัตถุจากคลาส Abstract ได้โดยตรง", "คลาส Abstract มีเมธอดธรรมดาไม่ได้", "คลาสลูกที่สืบทอดต้อง Implement abstract methods ทั้งหมด", "Python ไม่รองรับ Abstract Class"],
+                        answer: "คลาสลูกที่สืบทอดต้อง Implement abstract methods ทั้งหมด"
+                    },
+                    {
+                        question: "3. จงสร้าง Abstract Class ชื่อ Logger ที่มี abstract method ชื่อ log()",
+                        isCoding: true,
+                        solution: `from abc import ABC, abstractmethod
+
+class Logger(ABC):
+    @abstractmethod
+    def log(self, message):
+        pass
+
+class ConsoleLogger(Logger):
+    def log(self, message):
+        print(f"[CONSOLE] {message}")
+
+class FileLogger(Logger):
+    def log(self, message):
+        print(f"[FILE] Saving '{message}' to log.txt")
+
+console_logger = ConsoleLogger()
+console_logger.log("System startup.")`
+                    }
+                ]
+            }
+        };
+
+        const contentContainer = document.getElementById('content-container');
+        const navbar = document.getElementById('navbar');
+
+        function renderChapter(chapterId) {
+            const chapter = contentData[chapterId];
+            if (!chapter) return;
+
+            let quizHtml = chapter.quiz.length > 0 ? '<h2 class="mt-12">แบบทดสอบท้ายบท</h2>' : '';
+            chapter.quiz.forEach((q, index) => {
+                quizHtml += `<div class="quiz-item mt-8 p-6 border-2 border-slate-200 rounded-xl" id="quiz-${chapterId}-${index}">`;
+                quizHtml += `<p class="font-semibold text-lg text-slate-700">${q.question}</p>`;
+
+                if (q.isCoding) {
+                    quizHtml += `<div class="mt-4">
+                        <textarea class="w-full h-48 p-3 border rounded-lg font-mono text-sm bg-slate-50 focus:ring-2 focus:ring-blue-500 focus:border-blue-500" placeholder="เขียนโค้ดของคุณที่นี่..."></textarea>
+                        <button class="show-solution-btn mt-4 px-5 py-2 bg-slate-700 text-white rounded-lg hover:bg-slate-800 transition-colors">ดูเฉลย</button>
+                        <div class="solution-box hidden mt-4">
+                            <h4 class="font-bold text-slate-800">เฉลย:</h4>
+                            <pre><code class="language-python">${q.solution.replace(/</g, "&lt;").replace(/>/g, "&gt;")}</code></pre>
+                        </div>
+                    </div>`;
+                } else {
+                    quizHtml += '<div class="space-y-3 mt-4">';
+                    q.options.forEach(option => {
+                        quizHtml += `<button class="quiz-option block w-full text-left p-4 rounded-lg font-medium" data-question-index="${index}" data-multi="${q.multi || false}">${option}</button>`;
+                    });
+                    quizHtml += '</div>';
+                }
+                quizHtml += '</div>';
+            });
+
+            const chapterTitleHtml = chapterId === 'chapter-0' ? '' : `<h1><i class="fas ${chapter.icon} text-blue-500 mr-3"></i>บทที่ ${chapterId.split('-')[1]}: ${chapter.title}</h1>`;
+            contentContainer.innerHTML = `${chapterTitleHtml}${chapter.content}${quizHtml}`;
+            addEventListeners(chapterId);
+            updateActiveNav(chapterId);
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+        
+        function updateActiveNav(chapterId) {
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.classList.remove('active');
+                if (link.dataset.chapter === chapterId) {
+                    link.classList.add('active');
+                }
+            });
+        }
+
+        function handleQuizClick(e, chapterId) {
+            const button = e.target.closest('.quiz-option');
+            if (!button || button.disabled) return;
+
+            const questionIndex = button.dataset.questionIndex;
+            const isMulti = button.dataset.multi === 'true';
+            const questionData = contentData[chapterId].quiz[questionIndex];
+            const selectedOption = button.textContent;
+            
+            const parentQuizItem = document.getElementById(`quiz-${chapterId}-${questionIndex}`);
+            const allOptions = parentQuizItem.querySelectorAll('.quiz-option');
+
+            if (isMulti) {
+                if (questionData.answer.includes(selectedOption)) {
+                    button.classList.toggle('correct');
+                } else {
+                    button.classList.toggle('incorrect');
+                }
+            } else {
+                allOptions.forEach(opt => {
+                    opt.disabled = true;
+                    if (questionData.answer.includes(opt.textContent)) {
+                        opt.classList.add('correct');
+                    }
+                });
+                if (!questionData.answer.includes(selectedOption)) {
+                    button.classList.add('incorrect');
+                }
+            }
+        }
+
+        function handleSolutionClick(e) {
+            const button = e.target.closest('.show-solution-btn');
+            if (!button) return;
+            const solutionBox = button.nextElementSibling;
+            solutionBox.classList.toggle('hidden');
+        }
+
+        function handleCopyCode(e) {
+            const button = e.target.closest('.copy-btn');
+            if (!button) return;
+            const pre = button.parentElement;
+            const code = pre.querySelector('code').innerText;
+            navigator.clipboard.writeText(code).then(() => {
+                button.innerHTML = '<i class="fas fa-check"></i> คัดลอกแล้ว!';
+                setTimeout(() => {
+                    button.innerHTML = '<i class="fas fa-copy"></i> คัดลอก';
+                }, 2000);
+            });
+        }
+
+        function addEventListeners(chapterId) {
+            contentContainer.addEventListener('click', (e) => {
+                handleQuizClick(e, chapterId);
+                handleSolutionClick(e);
+                handleCopyCode(e);
+            });
+        }
+        
+        function initializeApp() {
+            // Populate navbar
+            Object.keys(contentData).forEach(key => {
+                const chapter = contentData[key];
+                const li = document.createElement('li');
+                const a = document.createElement('a');
+                a.href = `#${key}`;
+                a.className = 'nav-link px-4 py-2 text-slate-600 text-lg';
+                a.dataset.chapter = key;
+                a.innerHTML = `<i class="fas ${chapter.icon} mr-2 text-base"></i>${chapter.title}`;
+                a.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    renderChapter(key);
+                    history.pushState(null, '', `#${key}`);
+                });
+                li.appendChild(a);
+                navbar.appendChild(li);
+            });
+
+            // Initial load
+            const initialChapter = window.location.hash ? window.location.hash.substring(1) : 'chapter-0';
+            renderChapter(contentData[initialChapter] ? initialChapter : 'chapter-0');
+
+            window.addEventListener('popstate', () => {
+                 const chapterId = window.location.hash ? window.location.hash.substring(1) : 'chapter-0';
+                 renderChapter(contentData[chapterId] ? chapterId : 'chapter-0');
+            });
+        }
+
+        initializeApp();
+
+    </script>
+</body>
+</html>
